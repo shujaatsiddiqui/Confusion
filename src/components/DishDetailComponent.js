@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody,
   CardTitle } from 'reactstrap';
+import Footer from './FooterComponent';
 
 
     function RenderDish({dish}) {
@@ -49,7 +50,10 @@ import { Card, CardImg, CardText, CardBody,
                         <RenderDish dish = {props.dish} />
                     </div>
                     <div  className="col-12 col-md-5 m-1">
-                        <h1>Comments</h1>
+                        {
+                            props.dish != null && props.dish.comments != null ?
+                                <h1>Comments</h1> : <></>
+                        }    
                         {
                             props.dish != null ? props.dish.comments.map((comm,i)=>{
                                return <RenderComments key={i} comm = {comm} />
