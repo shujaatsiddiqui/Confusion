@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle} from 'reactstrap';
 
-    // making new functional component
+// making new functional component
 function RenderCard({item}) {
 
     return(
