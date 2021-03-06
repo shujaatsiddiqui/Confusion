@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { Card, CardImg, CardText, CardBody,
+import React, { useState } from 'react';
+import { Card, CardImg, CardText, CardBody, Button, Modal, ModalHeader, ModalBody, ModalFooter,
     CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import Footer from './FooterComponent';
+import CommentForm from './CommentFormComponent';
 
 
     function RenderDish({dish}) {
@@ -42,8 +42,15 @@ import Footer from './FooterComponent';
         }
     }
 
-    const DishDetail = (props) => {           
-        console.log(props);
+    const DishDetail = (props) => {   
+
+        const [modal, setModal] = useState(false);
+
+        const toggle = () => { 
+            debugger;
+            setModal(!modal);
+        } 
+
         return(           
             <div className="container">
                 <div className="row">
@@ -73,10 +80,17 @@ import Footer from './FooterComponent';
                             <div></div>
                         }
                     </div>
+                    <div  className="col-12 col-md-5 m-1">
+                        <Button outline color="primary" onClick={toggle} >Add Comment</Button>
+                    </div>
                 </div>
+                
+                <Modal isOpen={modal} toggle={toggle}>
+                    <CommentForm/>                            
+                </Modal>                        
             </div>
+            
         );
     }
-
 
 export default  DishDetail;
