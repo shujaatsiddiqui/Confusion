@@ -13,8 +13,8 @@ class CommentForm extends Component
     }
 
     handleSubmit(values) {
-        console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));
+        debugger;
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render()
@@ -29,7 +29,7 @@ class CommentForm extends Component
                         <Row className="form-group">
                             <Label htmlFor="Ratings" md={2}>Ratings</Label>
                             <Col md={10}>
-                                <Control.text model=".rating" id="rating" name="rating"
+                                <Control.text model=".rating" id="rating" name="rating" type="number"
                                     placeholder="Rating"
                                     className="form-control"
                                     validators={{
@@ -49,8 +49,8 @@ class CommentForm extends Component
                         <Row className="form-group">
                             <Label htmlFor="name" md={2}>Your Name</Label>
                             <Col md={10}>
-                                <Control.text model=".name" id="name" name="name"
-                                    placeholder="Rating"
+                                <Control.text model=".author" id="author" name="author"
+                                    placeholder="Author Name"
                                     className="form-control"
                                     validators={{
                                         required
@@ -58,7 +58,7 @@ class CommentForm extends Component
                                     />
                                 <Errors
                                     className="text-danger"
-                                    model=".name"
+                                    model=".author"
                                     show="touched"
                                     messages={{
                                         required: 'Required'
@@ -69,12 +69,12 @@ class CommentForm extends Component
                         <Row className="form-group">
                             <Label htmlFor="message" md={2}>Comments</Label>
                             <Col md={10}>
-                                <Control.textarea model=".message" id="message" name="message"
+                                <Control.textarea model=".comment" id="comment" name="comment"
                                     rows="12"
                                     className="form-control" />
                                 <Errors
                                     className="text-danger"
-                                    model=".message"
+                                    model=".comment"
                                     show="touched"
                                     messages={{
                                         required: 'Required'

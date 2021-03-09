@@ -3,6 +3,7 @@ import { Card, CardImg, CardText, CardBody, Button, Modal, ModalHeader, ModalBod
     CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from './CommentFormComponent';
+import { Loading } from './LoadingComponent';
 
 
     function RenderDish({dish}) {
@@ -23,7 +24,7 @@ import CommentForm from './CommentFormComponent';
             );
     }
 
-    function RenderComments({comm}) {
+    function RenderComments({comm, addComment, dishId}) {
         if (comm != null)
         {
             return (
@@ -47,50 +48,70 @@ import CommentForm from './CommentFormComponent';
         const [modal, setModal] = useState(false);
 
         const toggle = () => { 
-            debugger;
             setModal(!modal);
         } 
 
-        return(           
-            <div className="container">
-                <div className="row">
-                    <Breadcrumb>
-                        <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-                        <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
-                    </Breadcrumb>
-                    <div className="col-12">
-                        <h3>{props.dish.name}</h3>
-                        <hr />
-                    </div>                
-                </div>
-                <div className="row">
-                    <div  className="col-12 col-md-5 m-1">
-                        <RenderDish dish = {props.dish} />
-                    </div>
-                    <div  className="col-12 col-md-5 m-1">
-                        {
-                            props.dish != null && props.comments != null ?
-                                <h1>Comments</h1> : <></>
-                        }    
-                        {
-                            props.dish != null ? props.comments.map((comm,i)=>{
-                               return <RenderComments key={i} comm = {comm} />
-                            })
-                            :
-                            <div></div>
-                        }
-                    </div>
-                    <div  className="col-12 col-md-5 m-1">
-                        <Button outline color="primary" onClick={toggle} >Add Comment</Button>
+        if (props.isLoading) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <Loading />
                     </div>
                 </div>
-                
-                <Modal isOpen={modal} toggle={toggle}>
-                    <CommentForm/>                            
-                </Modal>                        
-            </div>
-            
-        );
+            );
+        }
+        else if (props.errMess) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <h4>{props.errMess}</h4>
+                    </div>
+                </div>
+            );
+        }
+        else if (props.dish != null) {
+                return(           
+                    <div className="container">
+                        <div className="row">
+                            <Breadcrumb>
+                                <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                                <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                            </Breadcrumb>
+                            <div className="col-12">
+                                <h3>{props.dish.name}</h3>
+                                <hr />
+                            </div>                
+                        </div>
+                        <div className="row">
+                            <div  className="col-12 col-md-5 m-1">
+                                <RenderDish dish = {props.dish} />
+                            </div>
+                            <div  className="col-12 col-md-5 m-1">
+                                {
+                                    props.dish != null && props.comments != null ?
+                                        <h1>Comments</h1> : <></>
+                                }    
+                                {
+                                    props.dish != null ? props.comments.map((comm,i)=>{
+                                    return <RenderComments key={i} comm = {comm}  />
+                                    })
+                                    :
+                                    <div></div>
+                                }
+                            </div>
+                            <div  className="col-12 col-md-5 m-1">
+                                <Button outline color="primary" onClick={toggle} >Add Comment</Button>
+                            </div>
+                        </div>
+                        
+                        <Modal isOpen={modal} toggle={toggle}>
+                            <CommentForm dishId={props.dish.id} addComment={props.addComment}/>                            
+                        </Modal>                        
+                    </div>
+                    
+                );
+        }
+        
     }
 
 export default  DishDetail;

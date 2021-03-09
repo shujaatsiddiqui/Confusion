@@ -80,7 +80,7 @@ class Contact extends Component {
                                         placeholder="First Name"
                                         className="form-control"
                                         validators={{
-                                            required, minLength: minLength(3), maxLength: maxLength(15)
+                                            required, minLength: minLength(3), maxLength: maxLength(15), isNumber
                                         }}
                                          />
                                     <Errors
@@ -90,7 +90,8 @@ class Contact extends Component {
                                         messages={{
                                             required: 'Required',
                                             minLength: 'Must be greater than 2 characters',
-                                            maxLength: 'Must be 15 characters or less'
+                                            maxLength: 'Must be 15 characters or less',
+                                            isNumber : 'only number'
                                         }}
                                      />
                                 </Col>
