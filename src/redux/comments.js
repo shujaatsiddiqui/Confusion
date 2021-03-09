@@ -4,7 +4,7 @@ import  * as ActionTypes from './ActionTypes';
 // reducer funciton
 // take current state and create new state on the basis of action provided to it.
 export const Comments = (state = COMMENTS, action) => {
-    debugger;
+    
     switch (action.type) {
         case ActionTypes.ADD_COMMENT:
             var comment = action.payload;
