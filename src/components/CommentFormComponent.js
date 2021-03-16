@@ -2,6 +2,7 @@ import React, { Component, useState } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter,  Breadcrumb, BreadcrumbItem,
     Button, Row, Col, Label  } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Loading } from './LoadingComponent';
 
 const required = (val) => val && val.length;
 class CommentForm extends Component
@@ -9,18 +10,33 @@ class CommentForm extends Component
 
     constructor(props) {
         super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);        
+        this.handleSubmit = this.handleSubmit.bind(this);     
+        this.state = {
+            isloading : false
+        }   
     }
 
     handleSubmit(values) {
+        this.setState({isloading:true});
         this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render()
     {
         return(
-                <div className="row row-content">
+               
+                <div className="row row-content">                    
                 <div className="col-12">
+                {
+                    this.state.isloading ? 
+                    <div className="container">
+                        <div className="row">            
+                            <Loading />
+                        </div>
+                    </div>
+                    :
+                    <></>
+                }
                 <h3>Submit Comment</h3>
                 </div>
                 <div className="col">

@@ -25,7 +25,6 @@ import { Loading } from './LoadingComponent';
     }
 
     function RenderComments({comm}) {
-        debugger;
         if (comm != null)
         {
             return (
@@ -44,11 +43,11 @@ import { Loading } from './LoadingComponent';
         }
     }
 
-    const DishDetail = (props) => {   
-
+    const DishDetail = (props) => { 
         const [modal, setModal] = useState(false);
 
-        const toggle = () => { 
+        const toggle = (postingComment) => {
+            debugger;
             setModal(!modal);
         } 
 
