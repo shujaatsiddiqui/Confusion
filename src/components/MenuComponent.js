@@ -10,7 +10,7 @@ import { Loading } from './LoadingComponent';
         return (
             <Card>
                 <Link to={`/menu/${dish.id}`} >
-                    <CardImg width="100%" src={dish.image} alt={dish.name} />
+                    <CardImg width="100%" src={'http://localhost:3001/'+dish.image} alt={dish.name} />
                     <CardImgOverlay>
                         <CardTitle>{dish.name}</CardTitle>
                     </CardImgOverlay>

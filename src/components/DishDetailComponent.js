@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardImg, CardText, CardBody, Button, Modal, ModalHeader, ModalBody, ModalFooter,
+import { Card, CardImg, CardText, CardBody, Button, Modal,
     CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from './CommentFormComponent';
@@ -11,7 +11,7 @@ import { Loading } from './LoadingComponent';
         if (dish != null)
             return(
                 <Card>
-                    <CardImg top src={dish.image} alt={dish.name} />
+                    <CardImg top src={'http://localhost:3001/'+dish.image} alt={dish.name} />
                     <CardBody>
                       <CardTitle>{dish.name}</CardTitle>
                       <CardText>{dish.description}</CardText>
@@ -24,7 +24,8 @@ import { Loading } from './LoadingComponent';
             );
     }
 
-    function RenderComments({comm, addComment, dishId}) {
+    function RenderComments({comm}) {
+        debugger;
         if (comm != null)
         {
             return (
@@ -105,7 +106,7 @@ import { Loading } from './LoadingComponent';
                         </div>
                         
                         <Modal isOpen={modal} toggle={toggle}>
-                            <CommentForm dishId={props.dish.id} addComment={props.addComment}/>                            
+                            <CommentForm dishId={props.dish.id} postComment={props.postComment}/>                            
                         </Modal>                        
                     </div>
                     
