@@ -11,7 +11,7 @@ import { Loading } from './LoadingComponent';
         if (dish != null)
             return(
                 <Card>
-                    <CardImg top src={'http://localhost:3001/'+dish.image} alt={dish.name} />
+                    <CardImg top src={process.env.REACT_APP_BASE_URL+dish.image} alt={dish.name} />
                     <CardBody>
                       <CardTitle>{dish.name}</CardTitle>
                       <CardText>{dish.description}</CardText>
@@ -47,7 +47,6 @@ import { Loading } from './LoadingComponent';
         const [modal, setModal] = useState(false);
 
         const toggle = (postingComment) => {
-            debugger;
             setModal(!modal);
         } 
 

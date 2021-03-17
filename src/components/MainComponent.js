@@ -32,6 +32,8 @@ const mapDispatchToProps = dispatch => ({
 class Main extends Component {
 
   componentDidMount() {
+    debugger;
+    console.log(process.env.REACT_APP_BASE_URL);
     this.props.fetchDishes();
     this.props.fetchComments();
     this.props.fetchPromos();

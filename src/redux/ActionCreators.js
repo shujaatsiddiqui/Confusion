@@ -6,8 +6,8 @@ import * as ActionTypes from './ActionTypes';
 // dishes
 export const fetchDishes = () => (dispatch) => {
     dispatch(dishesLoading(true));
-
-    return fetch('http://localhost:3001/' + 'dishes')
+    const url = process.env.REACT_APP_BASE_URL;
+    return fetch(url + 'dishes')
     .then(response => {
         if (response.ok) {
           return response;
@@ -47,7 +47,7 @@ export const addComment = (comment) => ({
 });
 
 export const fetchComments = () => (dispatch) => {    
-    return fetch('http://localhost:3001/' + 'comments')
+    return fetch(process.env.REACT_APP_BASE_URL + 'comments')
     .then(response => {
         if (response.ok) {
           return response;
@@ -87,7 +87,7 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
     };
     newComment.date = new Date().toISOString();
     
-    return fetch('http://localhost:3001/'  + 'comments', {
+    return fetch(process.env.REACT_APP_BASE_URL  + 'comments', {
         method: "POST",
         body: JSON.stringify(newComment),
         headers: {
@@ -118,7 +118,7 @@ export const fetchPromos = () => (dispatch) => {
     
     dispatch(promosLoading());
 
-    return fetch('http://localhost:3001/'  + 'promotions')
+    return fetch(process.env.REACT_APP_BASE_URL  + 'promotions')
     .then(response => {
         if (response.ok) {
           return response;
